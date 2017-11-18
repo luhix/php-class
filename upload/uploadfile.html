@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 此行定义字符集，在使用汉字的国家，字符集通常有 gb2312,utf-8两种字符集，设置不对会导致页面中文乱码
+                 因为我的编辑器是utf-8的，所以这里我定义字符集为utf-8。如果你的字符集是gb2312可以修改charset值 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- 此行多是IE浏览器不兼容导致的，现在IE6，IE7使用的人数不多了，大多数可以忽略 -->
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <!-- 定义文档标题 -->
+        <title>PHP上传实例</title>
+        <!-- 加入js脚本，简单的前端判断，防止没有选择上传文件就点击提交 -->
+        <script type="text/javascript">
+            // 当页面加载完后执行里边的函数体
+              // 因为页面的加载顺序是自上到下，否则你把JS移到页脚也可以
+            window.onload = function(){
+                // 给上传按钮添加鼠标单击事件
+                document.forms[0].elements[1].onclick = function(){
+                    // 判断要上传的文件名是否为空
+                    if( document.forms[0].file.value == '' ){
+                        // 如果是空则弹出警告
+                        alert('请先选择文件');
+                        // 结束脚本运行
+                        return;
+                    }
+                    // 如果文件不为空则上传文件
+                    document.forms[0].submit();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!-- 此行是定义form表单区域，上传文件必须用POST方式，还要添加 enctype="multipart/form-data" 属性
+             action里的值为你要处理上传文件的页面，也可以用url或者相对路径 -->
+        <form action="upload.php" method="post"  enctype="multipart/form-data">
+            <!-- 定义选择文件的浏览表单 value属性里值就是显示在按钮上的值 -->
+            <input type="file" name="file" value="选择要上传的文件" />
+            <!-- 定义提交到服务器的按钮 value属性里的值就是显示在按钮上的值 -->
+            <input type="button" value="上传" />
+        </form>
+    </body>
+</html>
